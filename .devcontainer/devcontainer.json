@@ -1,0 +1,15 @@
+{
+  "name": "robosuite-dev",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",  // Or any base image you're using
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.7"
+    }
+  },
+  "postCreateCommand": "pip install mujoco robosuite",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python"]
+    }
+  }
+}
