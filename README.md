@@ -8,18 +8,9 @@ The project uses the **Robosuite** library for simulation and **PyTorch** for de
 
 ## Requirements
 
-To run this project, ensure you have the following libraries installed:
-
-- Python 3.x
-- `gym`
-- `robosuite`
-- `torch`
-- `numpy`
-- `tensorboard`
-
 You can install the required dependencies by running:
    ```
-   pip install gymnasium numpy matplotlib tqdm
+   pip install -r requirements.txt
    ```
 Make sure you have the necessary dependencies for Robosuite and PyTorch. You may need to install specific versions of these libraries based on your environment.
 
@@ -33,15 +24,15 @@ This project leverages the TD3 algorithm to train a reinforcement learning agent
 
 ## Key Components:
 
-main.py: Main entry point to train the TD3 agent. It initializes the environment, sets hyperparameters, and orchestrates the training process, saving the models periodically.
+`main.py`: Main entry point to train the TD3 agent. It initializes the environment, sets hyperparameters, and orchestrates the training process, saving the models periodically.
 
-td3_torch.py: Contains the implementation of the TD3 agent, including the actor-critic networks, the replay buffer, and the learning process.
+`td3_torch.py`: Contains the implementation of the TD3 agent, including the actor-critic networks, the replay buffer, and the learning process.
 
-buffer.py: Implements a replay buffer that stores the experiences and samples them to train the agent.
+`buffer.py`: Implements a replay buffer that stores the experiences and samples them to train the agent.
 
-networks.py: Defines the neural network architectures for the Actor and Critic models used in the TD3 algorithm.
+`networks.py`: Defines the neural network architectures for the Actor and Critic models used in the TD3 algorithm.
 
-test.py: A script to visualize the performance of the trained agent after training.
+`test.py`: A script to visualize the performance of the trained agent after training.
 
 ---
 
