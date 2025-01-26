@@ -20,9 +20,11 @@ if __name__ == "__main__":
         robots="Panda",
         controller_configs= suite.load_controller_config(default_controller="JOINT_VELOCITY"),
         horizon=300,
-        has_renderer=False,
+        has_renderer=True,
         use_camera_obs=False,
-        reward_shaping=True, #
+        render_camera="frontview",
+        has_offscreen_renderer=True,
+        reward_shaping=True, 
         control_freq=20,
     )
 
@@ -54,30 +56,28 @@ if __name__ == "__main__":
                   layer2_size=layer2_size, 
                   batch_size=batch_size, 
                   noise=noise)
-
-    writer = SummaryWriter(f"runs/{env_name}")
+    
     n_games = 1000
     best_score = 0
-    episode_identifier = f"actor_{actor_learning_rate}_critic_{critic_learning_rate}_gamma_{gamma}_update_actor_interval_{update_actor_interval}_warmup_{warmup}_n_actions_{n_actions}_layer1_size_{layer1_size}_layer2_size_{layer2_size}_batch_size_{batch_size}_noise_{noise}"
+    episode_identifier = f"test_actor_{actor_learning_rate}_critic_{critic_learning_rate}_gamma_{gamma}_update_actor_interval_{update_actor_interval}_warmup_{warmup}_n_actions_{n_actions}_layer1_size_{layer1_size}_layer2_size_{layer2_size}_batch_size_{batch_size}_noise_{noise}"
 
-    agent.load_models() # to continue training
+    agent.load_models() # loads models from default tmp/td3 directory
+
     for i in range(n_games):
         obs = env.reset()
         done = False
         score = 0
         while not done:
-            action = agent.choose_action(obs)
+            action = agent.choose_action(obs, eval=True)
             obs_, reward, done, info = env.step(action)
+            env.render()
             score += reward
-            agent.remember(obs, action, reward, obs_, done)
-            agent.learn()
             obs = obs_
-
-        writer.add_scalar(f"score-{episode_identifier}", score, global_step= i)
-        
-        if (i%10 == 0):
-            agent.save_models(episode_identifier)
+            time.sleep(0.05)
         
         print(f"episode: {i} score: {score}")
 
+        
 
+
+    
