@@ -59,7 +59,6 @@ if __name__ == "__main__":
     
     n_games = 1000
     best_score = 0
-    episode_identifier = f"test_actor_{actor_learning_rate}_critic_{critic_learning_rate}_gamma_{gamma}_update_actor_interval_{update_actor_interval}_warmup_{warmup}_n_actions_{n_actions}_layer1_size_{layer1_size}_layer2_size_{layer2_size}_batch_size_{batch_size}_noise_{noise}"
 
     agent.load_models() # loads models from default tmp/td3 directory
 
